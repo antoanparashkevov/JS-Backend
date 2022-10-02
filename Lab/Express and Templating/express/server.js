@@ -7,12 +7,6 @@ app.get('/',(req,res)=>{
     res.send('hello')
 })
 
-
-//every symbol, ex: /catalog/* also works.
-app.all('*',(req,res)=>{
-    res.status(404).send('404 not found')
-})
-
 app.get('/create',(req,res)=>{
     res.send(`
     <form method="post">
@@ -27,4 +21,17 @@ app.post('/create',(req,res)=>{
     res.end()
 })
 
+app.get('/catalog',(req,res)=>{
+    res.send('Welcome to catalog page')
+})
+
+app.get('/catalog/:productId',(req,res)=>{
+    console.log(req.params)
+    res.send('Welcome to product number ' + req.params.productId);
+})
+
+//every symbol, ex: /catalog/* also works.
+app.all('*',(req,res)=>{
+    res.status(404).send('404 not found')
+})
 app.listen(3000, ()=>console.log('running'));
