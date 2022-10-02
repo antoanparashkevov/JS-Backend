@@ -30,9 +30,10 @@ app.route('/create')
     </form>
     `)
 })
-    .post('/create',(req,res)=>{
+    .post((req,res)=>{
     console.log('handling post request')
-    res.end()
+        res.status(201).send('Item sent successfully')
+        res.end()
 })
 
 app.get('/catalog',(req,res)=>{
