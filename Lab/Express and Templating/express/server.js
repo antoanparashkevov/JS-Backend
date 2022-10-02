@@ -7,7 +7,22 @@ app.get('/',(req,res)=>{
     res.send('hello')
 })
 
-app.get('/create',(req,res)=>{
+// app.get('/create',(req,res)=>{
+//     res.send(`
+//     <form method="post">
+//     <input type="text" name="name">
+//     <button>Send</button>
+//     </form>
+//     `)
+// })
+//
+// app.post('/create',(req,res)=>{
+//     console.log('handling post request')
+//     res.end()
+// })
+
+app.route('/create')
+    .get((req,res)=>{
     res.send(`
     <form method="post">
     <input type="text" name="name">
@@ -15,8 +30,7 @@ app.get('/create',(req,res)=>{
     </form>
     `)
 })
-
-app.post('/create',(req,res)=>{
+    .post('/create',(req,res)=>{
     console.log('handling post request')
     res.end()
 })
