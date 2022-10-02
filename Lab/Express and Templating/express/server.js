@@ -4,7 +4,9 @@ const app = express();
 
 app.get('/',(req,res)=>{
     //send is a combination for write() and end()
-    res.send('hello')
+    // res.send('hello')
+    
+    res.sendFile(__dirname + '/index.html')
 })
 
 // app.get('/create',(req,res)=>{
