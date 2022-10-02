@@ -45,6 +45,19 @@ app.get('/catalog/:productId',(req,res)=>{
     res.send('Welcome to product number ' + req.params.productId);
 })
 
+app.get('/data',(req,res)=>{
+    res.json([
+        {
+            name:'Peter',
+            age:25
+        },
+        {
+            name:'John',
+            age:30
+        }
+    ])
+})
+
 //every symbol, ex: /catalog/* also works.
 app.all('*',(req,res)=>{
     res.status(404).send('404 not found')
