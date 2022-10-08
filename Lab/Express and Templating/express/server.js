@@ -14,6 +14,7 @@ const app = express();
 app.engine('.hbs',handlebars.engine)
 app.set('view engine','.hbs')
 
+app.use('/static',express.static('static'))
 
 //Application level middleware
 app.use(logger())
