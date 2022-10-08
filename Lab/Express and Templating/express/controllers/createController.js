@@ -3,12 +3,9 @@ const {Router} = require('express')
 const router = Router()
 
 router.get('/',(req,res)=>{
-    res.send(`
-    <form method="post">
-    <input type="text" name="name">
-    <button>Send</button>
-    </form>
-    `)
+   res.render('pages/create', {
+       method: 'post'
+   })
 })
 
 router.post('/',(req,res)=>{
