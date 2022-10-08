@@ -1,5 +1,7 @@
 const express = require('express');
 
+//registering controllers
+const catalogController = require('./controllers/catalogController')
 const app = express();
 
 app.get('/',(req,res)=>{
@@ -38,14 +40,8 @@ app.route('/create')
         res.end()
 })
 
-app.get('/catalog',(req,res)=>{
-    res.send('Welcome to catalog page')
-})
+app.use('/catalog',catalogController)
 
-app.get('/catalog/:productId',(req,res)=>{
-    console.log(req.params)
-    res.send('Welcome to product number ' + req.params.productId);
-})
 
 app.get('/data',(req,res)=>{
     res.json([
