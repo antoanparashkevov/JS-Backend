@@ -11,7 +11,9 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/:productId',(req,res)=>{
-   res.render('pages/details')
+    const productId = req.params.productId;
+    const product = dataService.getById(productId)
+   res.render('pages/details',product)
 })
 
 
