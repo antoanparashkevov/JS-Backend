@@ -1,12 +1,13 @@
 const {Router} = require('express')
-
+const dataService = require('../services/productService')
 const router = Router()
 
 //we can call Router also as a constructor
 // const router = new Router()
 
 router.get('/',(req,res)=>{
-    res.render('pages/catalog')
+    const products = dataService.getList()
+    res.render('pages/catalog', {products})
 })
 
 router.get('/:productId',(req,res)=>{
