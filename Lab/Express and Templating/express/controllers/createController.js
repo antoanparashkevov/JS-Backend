@@ -4,7 +4,8 @@ const router = Router()
 
 router.get('/',(req,res)=>{
    res.render('pages/create', {
-       method: 'post'
+       method: 'post',
+       action: '/create'
    })
 })
 

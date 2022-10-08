@@ -19,6 +19,9 @@ app.use('/static',express.static('static'))
 //Application level middleware
 app.use(logger())
 
+//Application level middleware that adds a body to the request
+app.use(express.urlencoded({extended:false}))
+
 app.use(homeController)
 
 app.use('/about',aboutController)
