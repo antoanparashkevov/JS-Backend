@@ -13,10 +13,9 @@ app.engine('.hbs',handlebars.engine)
 app.set('view engine','.hbs')
 
 app.get('/',(req,res)=>{
-    //send is a combination for write() and end()
-    // res.send('hello')
-    
-    res.sendFile(__dirname + '/index.html')
+   res.render('home',{
+       username: 'Peter'
+   })
 })
 
 //Application level middleware
