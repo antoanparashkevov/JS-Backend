@@ -2,6 +2,7 @@ const express = require('express');
 
 //registering controllers
 const catalogController = require('./controllers/catalogController')
+const createController = require('./controllers/createController')
 const app = express();
 
 app.get('/',(req,res)=>{
@@ -25,20 +26,7 @@ app.get('/',(req,res)=>{
 //     res.end()
 // })
 
-app.route('/create')
-    .get((req,res)=>{
-    res.send(`
-    <form method="post">
-    <input type="text" name="name">
-    <button>Send</button>
-    </form>
-    `)
-})
-    .post((req,res)=>{
-    console.log('handling post request')
-        res.status(201).send('Item sent successfully')
-        res.end()
-})
+app.use('/create',createController)
 
 app.use('/catalog',catalogController)
 
