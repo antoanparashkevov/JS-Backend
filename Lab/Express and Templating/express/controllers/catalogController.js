@@ -6,12 +6,11 @@ const router = Router()
 // const router = new Router()
 
 router.get('/',(req,res)=>{
-    res.send('Welcome to catalog page')
+    res.render('pages/catalog')
 })
 
 router.get('/:productId',(req,res)=>{
-    console.log(req.params)
-    res.send('Welcome to product number ' + req.params.productId);
+   res.render('pages/details')
 })
 
 
