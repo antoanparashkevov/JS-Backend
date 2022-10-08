@@ -3,6 +3,8 @@ const express = require('express');
 //registering controllers
 const catalogController = require('./controllers/catalogController')
 const createController = require('./controllers/createController')
+//registering middlewares
+const logger = require('./middleware/logger')
 const app = express();
 
 app.get('/',(req,res)=>{
@@ -25,6 +27,10 @@ app.get('/',(req,res)=>{
 //     console.log('handling post request')
 //     res.end()
 // })
+
+
+//Application level middleware
+app.use(logger())
 
 app.use('/create',createController)
 
