@@ -3,6 +3,7 @@ const express = require('express');
 //registering controllers
 const catalogController = require('./controllers/catalogController')
 const createController = require('./controllers/createController')
+
 //registering middlewares
 const logger = require('./middleware/logger')
 const app = express();
@@ -13,21 +14,6 @@ app.get('/',(req,res)=>{
     
     res.sendFile(__dirname + '/index.html')
 })
-
-// app.get('/create',(req,res)=>{
-//     res.send(`
-//     <form method="post">
-//     <input type="text" name="name">
-//     <button>Send</button>
-//     </form>
-//     `)
-// })
-//
-// app.post('/create',(req,res)=>{
-//     console.log('handling post request')
-//     res.end()
-// })
-
 
 //Application level middleware
 app.use(logger())
