@@ -1,4 +1,6 @@
 const express = require('express');
+const exphbs = require('express-handlebars')
+const handlebars = exphbs.create({extname:'.hbs'})
 
 //registering controllers
 const catalogController = require('./controllers/catalogController')
@@ -7,6 +9,8 @@ const createController = require('./controllers/createController')
 //registering middlewares
 const logger = require('./middleware/logger')
 const app = express();
+app.engine('.hbs',handlebars.engine)
+app.set('view engine','.hbs')
 
 app.get('/',(req,res)=>{
     //send is a combination for write() and end()
