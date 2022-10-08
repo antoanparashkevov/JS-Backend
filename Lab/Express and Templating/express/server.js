@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const handlebars = exphbs.create({extname:'.hbs'})
 
 //registering controllers
+const homeController = require('./controllers/homeController')
 const catalogController = require('./controllers/catalogController')
 const createController = require('./controllers/createController')
 
@@ -12,14 +13,11 @@ const app = express();
 app.engine('.hbs',handlebars.engine)
 app.set('view engine','.hbs')
 
-app.get('/',(req,res)=>{
-   res.render('home',{
-       username: 'Peter'
-   })
-})
 
 //Application level middleware
 app.use(logger())
+
+app.use(homeController)
 
 app.use('/create',createController)
 
