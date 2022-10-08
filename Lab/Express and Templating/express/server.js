@@ -4,6 +4,7 @@ const handlebars = exphbs.create({extname:'.hbs'})
 
 //registering controllers
 const homeController = require('./controllers/homeController')
+const aboutController = require('./controllers/aboutController')
 const catalogController = require('./controllers/catalogController')
 const createController = require('./controllers/createController')
 
@@ -18,6 +19,8 @@ app.set('view engine','.hbs')
 app.use(logger())
 
 app.use(homeController)
+
+app.use('/about',aboutController)
 
 app.use('/create',createController)
 

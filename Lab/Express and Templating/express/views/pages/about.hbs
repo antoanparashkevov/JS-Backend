@@ -1,0 +1,15 @@
+<h2>Welcome to about page</h2>
+<p>Contact us: {{phoneNumber}}</p>
+
+<span>Our team</span>
+<ul>
+    {{#if employees }}
+    {{#each employees}}
+        <li>
+            <p>{{name}} - {{role}}</p>
+        </li>    
+    {{/each}}
+    {{else}}
+        <h5>Something went wrong! Try again later!</h5>
+    {{/if}}
+</ul>
