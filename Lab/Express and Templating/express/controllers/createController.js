@@ -1,5 +1,5 @@
 const {Router} = require('express')
-
+const {create} = require('../services/productService')
 const router = Router()
 
 router.get('/',(req,res)=>{
@@ -10,9 +10,11 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-    console.log('handling POST request')
-    res.status(201).send('Item sent successfully')
-    res.end()
+    console.log(req.body);
+    const enteredData = req.body
+    create(enteredData.name,+enteredData.price)
+    res.redirect('/catalog')
+    
 })
 
 module.exports = router

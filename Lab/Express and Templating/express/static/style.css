@@ -44,3 +44,12 @@ a:hover{
 ul li {
     margin-bottom: 15px;
 }
+
+label {
+    display:block;
+    margin-bottom: 8px;
+}
+span {
+    width: 60px;
+    display: inline-block;
+}

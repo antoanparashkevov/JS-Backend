@@ -19,7 +19,17 @@ function getById(id) {
     return data.find((product)=>product.id === id)
 }
 
+function create(name, price) {
+    const id = Math.ceil(Math.random() * 9999)
+    data.push({
+        id: id.toString(),
+        name,
+        price
+    })
+}
+
 module.exports = {
     getList,
-    getById
+    getById,
+    create
 }
