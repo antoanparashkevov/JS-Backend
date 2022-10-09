@@ -15,9 +15,8 @@ async function start(){
     // reference to the collection
     const collection = db.collection('Person');
     // query or cursor
-    const cursor = collection.find({})
-    cursor.toArray((data)=>{
-        console.log(data)
-    })
+    const cursor = collection.find({});
+    const data = await cursor.toArray();
+    console.log(data)
 
 }
