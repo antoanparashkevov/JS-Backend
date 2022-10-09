@@ -1,17 +1,17 @@
 const mongodb = require('mongodb');
 
 const connectionString = 'mongodb://localhost:27017'
-
-
-// client instance ...
-const connection = new mongodb.MongoClient(connectionString,{
+start();
+async function start(){
+    // client instance ...
+    const connection = new mongodb.MongoClient(connectionString,{
     useUnifiedTopology: true,
 })
+    await connection.connect();
 
-connection.connect((err,client)=>{
     console.log('MongoDB running')
     // reference to the database
-    const db = client.db('People')
+    const db = connection.db('People')
     // reference to the collection
     const collection = db.collection('Person');
     // query or cursor
@@ -19,4 +19,5 @@ connection.connect((err,client)=>{
     cursor.toArray((data)=>{
         console.log(data)
     })
-})
+
+}
