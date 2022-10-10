@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Pet = require('./models/Pet')
 
 const connectionString = 'mongodb://localhost:27017/testdb'
 
@@ -11,4 +12,6 @@ async function start(){
     });
 
         console.log('database connected')
+        const data = await Pet.find({});
+        console.log(data)
 }
