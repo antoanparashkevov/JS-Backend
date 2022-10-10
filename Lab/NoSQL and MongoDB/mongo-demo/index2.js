@@ -14,16 +14,16 @@ async function start(){
         console.log('database connected')
 
         //cursor or query
-        const data = await Pet.find({});
-        console.log(data[0].sayHi())
+        // const data = await Pet.find({});
+        // console.log(data[0].sayHi())
 
-        const pet = new Pet({
-            name: 'John',
-            age: 2,
-            color: 'Yellow'
-        })
-        
-        await pet.save();
+        // const pet = new Pet({
+        //     name: 'Peter',
+        //     age: 2,
+        //     color: 'Yellow'
+        // })
+        await Pet.deleteOne({_id: '63445bffe702b882927a664f'})
+        // await pet.save();
 
         await mongoose.disconnect();
 }
