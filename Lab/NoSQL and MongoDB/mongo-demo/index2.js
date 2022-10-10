@@ -22,7 +22,8 @@ async function start(){
         //     age: 2,
         //     color: 'Yellow'
         // })
-        await Pet.deleteOne({_id: '63445bffe702b882927a664f'})
+        // await Pet.deleteOne({_id: '63445bffe702b882927a664f'})
+        await Pet.findByIdAndUpdate('63445beb65ac28a0cd5dfd14',{ $set: {age: 3}})
         // await pet.save();
 
         await mongoose.disconnect();
