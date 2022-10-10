@@ -37,11 +37,13 @@ async function start(){
         // await Pet.deleteOne({_id: '63445bffe702b882927a664f'})
         // await Pet.findByIdAndUpdate('63445beb65ac28a0cd5dfd14',{ $set: {age: 3}})
         // await pet.save();
-        const article = await Article.findOne({});
-        const comment  = await Comment.findOne({});
+        // const article = await Article.findOne({});
+        // const comment  = await Comment.findOne({});
 
-        article.comments.push(comment);
-        await article.save();
+        // article.comments.push(comment);
+        // await article.save();
+        const article = await Article.findOne({}).populate('comments')
+        console.log(article);
 
         await mongoose.disconnect();
 }
