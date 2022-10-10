@@ -14,4 +14,11 @@ async function start(){
         console.log('database connected')
         const data = await Pet.find({});
         console.log(data)
+
+        const pet = new Pet({
+            name: 'Jo',
+            age: 25
+        })
+
+        await pet.save();
 }

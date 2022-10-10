@@ -5,6 +5,7 @@ const PetSchema = new Schema({
     age: Number
 })
 
+// we create a model with the given schema
 const Pet = model('Pet', PetSchema)
 
 
