@@ -12,13 +12,18 @@ async function start(){
     });
 
         console.log('database connected')
+
+        //cursor or query
         const data = await Pet.find({});
-        console.log(data)
+        console.log(data[0].sayHi())
 
         const pet = new Pet({
-            name: 'Jo',
-            age: 25
+            name: 'John',
+            age: 2,
+            color: 'Yellow'
         })
-
+        
         await pet.save();
+
+        await mongoose.disconnect();
 }
