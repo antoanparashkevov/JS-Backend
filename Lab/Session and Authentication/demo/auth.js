@@ -13,20 +13,21 @@ app.use(session({
 
 const homeTemplate = (currentUser, allUsers) => 
     `<h1>Welcome, ${currentUser || 'guest'}</h1>
+    ${!currentUser ? '<p>Please login <a href="/login">Login</a></p>' : ''}
    <ul>
    ${allUsers.map(user=>`<li>${user.username}</li>`).join('\n')}
 </ul>
 `
 
 app.get('/',(req,res)=>{
-   res.send(homeTemplate('Antoan',users))
+   res.send(homeTemplate(req.session.user,users))
 })
 
 const registerTemplate = (error)=>
     `
     <h1>Register</h1>
      ${error ? `<p>${error}</p>` : ''}
-    <form action="/login" method="post">
+    <form action="/register" method="post">
     <label for="name">Username: <input type="text" name="name" placeholder="Username"></label>
     <label for="pass">Password: <input type="password" name="pass" placeholder="Password"></label>
     <label for="pass">Repeat: <input type="password" name="repass" placeholder="Password"></label>
@@ -62,7 +63,6 @@ app.get('/login',(req,res)=> {
     </form>
     `)
 })
-
 
 app.post('/login',async (req,res)=>{
     console.log(req.body)

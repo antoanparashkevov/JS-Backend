@@ -7,12 +7,10 @@ const {hashing,compare} = require('./hashing')
  *     hashedPassword: (string)
  * }
  */
-const users = [
-    {username: 'Nadia'}
-];
+const users = [];
 
 async function register(username, password) {
-    if(users.some(user=>user.username.toLowerCase() === username.toLowerCase())){
+    if(users.find(user=>user.username.toLowerCase() === username.toLowerCase())){
         throw new Error('Username is taken')
     }
     const user = {
@@ -23,7 +21,13 @@ async function register(username, password) {
 }
 
 async function login(username,password){
+    const user = users.find(user=>user.username.toLowerCase() === username.toLowerCase())
     
+    if(!user){
+        return false
+    } else {
+        return compare(password,user.hashedPassword)
+    }
 }
 
 module.exports = {
