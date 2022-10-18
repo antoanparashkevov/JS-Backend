@@ -21,7 +21,7 @@ async function register(username, password) {
 }
 
 async function login(username,password){
-    const user = users.find(user=>user.username === username)
+    const user = users.find(user=>user.username.toLowerCase() === username.toLowerCase())
     
     if(!user){
         return false
