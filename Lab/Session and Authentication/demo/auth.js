@@ -42,15 +42,15 @@ app.get('/register',(req,res)=> {
 
 app.post('/register',async (req,res)=> {
     try{
-        if(req.body.name.trim() === '' || req.body.password.trim() === '') {
+        if(req.body.name.trim() === '' || req.body.password === '') {
             throw new Error('All fields are required!')
-        }else if(req.body.pass.trim() !== req.body.repass.trim()){
+        }else if(req.body.pass !== req.body.repass){
             throw new Error('Password doesn\'t match');
         }
         await register(req.body.name,req.body.pass)
         res.redirect('/')
     }catch(err){
-        res.render(registerTemplate(err.message))
+        res.send(registerTemplate(err.message))
     }
 })
 
@@ -66,7 +66,7 @@ app.get('/login',(req,res)=> {
 
 app.post('/login',async (req,res)=>{
     console.log(req.body)
-    if(await login(req.body.user, req.body.pass)){
+    if(await login(req.body.name, req.body.pass)){
         req.session.user = req.body.name
         res.redirect('/')
     }else{
