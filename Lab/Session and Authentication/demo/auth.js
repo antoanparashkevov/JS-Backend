@@ -1,6 +1,6 @@
 const express = require('express')
 const session = require('express-session')
-const {register, login} = require("./userService");
+const {register, login, users} = require("./userService");
 
 const app = express()
 app.use(express.urlencoded({extended: true}))
@@ -10,18 +10,22 @@ app.use(session({
     cookie: {secure: false},
     resave: false
 }))
+
+const homeTemplate = (currentUser, allUsers) => 
+    `<h1>Welcome, ${currentUser || 'guest'}</h1>
+   <ul>
+   ${allUsers.map(user=>`<li>${user.username}</li>`).join('\n')}
+</ul>
+`
+
 app.get('/',(req,res)=>{
-    if(req.session.user){
-        res.send(`<p>Hello, ${req.session.user}</p>`)
-    }else {
-        res.send(`<p>Hello, guest</p>`)
-    }
+   res.send(homeTemplate('Antoan',users))
 })
 
 const registerTemplate = (error)=>
     `
     <h1>Register</h1>
-     ${error ? <p>${error}</p> : ''}
+     ${error ? `<p>${error}</p>` : ''}
     <form action="/login" method="post">
     <label for="name">Username: <input type="text" name="name" placeholder="Username"></label>
     <label for="pass">Password: <input type="password" name="pass" placeholder="Password"></label>
