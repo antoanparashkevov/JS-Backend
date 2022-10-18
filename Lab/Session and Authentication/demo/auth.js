@@ -1,5 +1,6 @@
 const express = require('express')
 const session = require('express-session')
+const {register, login} = require("./userService");
 
 const app = express()
 app.use(express.urlencoded({extended: true}))
@@ -17,6 +18,37 @@ app.get('/',(req,res)=>{
     }
 })
 
+const registerTemplate = (error)=>
+    `
+    <h1>Register</h1>
+     ${error ? <p>${error}</p> : ''}
+    <form action="/login" method="post">
+    <label for="name">Username: <input type="text" name="name" placeholder="Username"></label>
+    <label for="pass">Password: <input type="password" name="pass" placeholder="Password"></label>
+    <label for="pass">Repeat: <input type="password" name="repass" placeholder="Password"></label>
+    <input type="submit" value="Sign up">
+    </form>
+    `
+
+
+app.get('/register',(req,res)=> {
+    res.send(registerTemplate())
+})
+
+app.post('/register',async (req,res)=> {
+    try{
+        if(req.body.name.trim() === '' || req.body.password.trim() === '') {
+            throw new Error('All fields are required!')
+        }else if(req.body.pass.trim() !== req.body.repass.trim()){
+            throw new Error('Password doesn\'t match');
+        }
+        await register(req.body.name,req.body.pass)
+        res.redirect('/')
+    }catch(err){
+        res.render(registerTemplate(err.message))
+    }
+})
+
 app.get('/login',(req,res)=> {
     res.send(`
     <form action="/login" method="post">
@@ -27,14 +59,10 @@ app.get('/login',(req,res)=> {
     `)
 })
 
-const users = {
-    'peter': '123',
-    'john': '12345'
-}
 
-app.post('/login',(req,res)=>{
+app.post('/login',async (req,res)=>{
     console.log(req.body)
-    if(users[req.body.name] !== undefined && users[req.body.name] === req.body.pass){
+    if(await login(req.body.user, req.body.pass)){
         req.session.user = req.body.name
         res.redirect('/')
     }else{
