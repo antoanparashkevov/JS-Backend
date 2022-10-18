@@ -1,7 +1,7 @@
 const http = require('http')
 const server = http.createServer((req,res)=>{
     if(req.url === '/'){
-        console.log(req.headers.cookie)
+        let visited = 0;
         if(req.headers.cookie) {
             const cookies = Object.fromEntries(req.headers.cookie
                 .split(';')
@@ -9,9 +9,13 @@ const server = http.createServer((req,res)=>{
                 .map(c=>c.split('=')))
             
             console.log(cookies)
+            if(cookies.visited) {
+                visited = Number(cookies.visited)
+            }
         }
+        visited++
         res.writeHead(200,{
-            'Set-Cookie':'visited=1'
+            'Set-Cookie':`visited=${visited}`
         })
         res.write('Hello')
         res.end()
