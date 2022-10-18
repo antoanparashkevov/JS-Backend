@@ -15,9 +15,11 @@ const server = http.createServer((req,res)=>{
         }
         visited++
         res.writeHead(200,{
-            'Set-Cookie':`visited=${visited}`
+            'Set-Cookie':`visited=${visited}; httpOnly`
         })
-        res.write('Hello')
+        res.write(`
+        <p>You visited ${visited} times.</p>
+        `)
         res.end()
     }else{
         res.writeHead(404);
