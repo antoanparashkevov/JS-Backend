@@ -5,10 +5,16 @@
     <title>Title</title>
 <!--    or defer to load the script after the html body-->
     <script src="app.js" type="module"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h2>Hello world</h2>
-    <button>Load</button>
+    <form>
+        <label for="name"><input type="text" name="name" id="name"/>Name</label>
+        <label for="desc"><input type="text" name="desc" id="desc"/>Description</label>
+        <button id="create">Create</button>
+    </form>
+    <button id="load">Load</button>
     <ul></ul>
 </body>
 </html>
