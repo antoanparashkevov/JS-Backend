@@ -13,7 +13,6 @@ async function loadProducts() {
         method: 'GET'
     })
     const data = await res.json();  
-    console.log(data)
     list.replaceChildren();//for each click to remove the existing li elements.
     for(let item of data) {
         createRow(item)
@@ -89,9 +88,7 @@ async function deleteItem(id) {
 async function detailsItem(id) {
     const res = await fetch('/data/' + id)
     if(res.ok) {
-        const data = await res.json();
-        console.log('Current product', data)
-        return data;
+        return res.json();
     }
 }
 

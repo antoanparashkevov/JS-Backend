@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-
+const port = 3000;
 //the server takes the information from static folder and send to us
 app.use(express.static('static'))
 app.use(express.json());
@@ -20,7 +20,6 @@ const data = [
 ]
 
 app.get('/data', (req,res)=>{
-    console.log('handling the request...')
     res.json(data)
     res.end();
 })
@@ -32,7 +31,6 @@ app.post('/data', (req,res) =>{
         name: formData.name,
         desc: formData.desc,
     }
-    console.log('formData', formData)
     data.push(record)
     res.status(201).json(record);
 })
@@ -61,4 +59,4 @@ app.put('/data/:id', (req,res)=>{
     res.status(202).end()
 })
 
-app.listen(3000)
+app.listen(port, ()=>console.log('Server listening on port ' + port))
