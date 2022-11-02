@@ -34,7 +34,14 @@ app.post('/data', (req,res) =>{
     }
     console.log('formData', formData)
     data.push(record)
-    res.status(201).end();
+    res.status(201).json(record);
+})
+
+app.delete('/data/:id', (req,res)=>{
+    const id = req.params.id;
+    const arrayIndex = data.findIndex(p=>p.id === id);
+    data.splice(arrayIndex,1)
+    res.end();
 })
 
 app.listen(3000)
