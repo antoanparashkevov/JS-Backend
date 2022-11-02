@@ -8,10 +8,12 @@ app.use(express.json());
 
 const data = [
     {
+        id: 'asdf1',
         name: 'Bulb lights',
         desc: 'For cars'
     },
     {
+        id: 'asdf2',
         name: 'Exhaust',
         desc: 'simple desc'
     }
@@ -25,8 +27,13 @@ app.get('/data', (req,res)=>{
 
 app.post('/data', (req,res) =>{
     const formData = req.body;
+    const record = {
+        id: ('999999'+(Math.random() * 9999).toString(16)).slice(-5),
+        name: formData.name,
+        desc: formData.desc,
+    }
     console.log('formData', formData)
-    data.push(formData)
+    data.push(record)
     res.status(201).end();
 })
 
