@@ -1,7 +1,7 @@
 let list = document.querySelector('ul')
 const loadButton = document.querySelector('#load');
 const form = document.querySelector('form')
-list.addEventListener('click',deleteItem)
+list.addEventListener('click',itemAction)
 
 loadButton.addEventListener('click', async()=>{
     const res = await fetch('/data', {
@@ -19,13 +19,19 @@ function createRow(item) {
     const li = document.createElement('li')
     li.id = item.id;
     li.textContent = `${item.name} - ${item.desc}`;
-    const delBtn = document.createElement('a');
-    delBtn.href='javascript:void(0)'
-    delBtn.textContent = ' Delete '
-    li.appendChild(delBtn)
+    createAction(li, '[Delete]', 'delete')
+    createAction(li, '[Details]', 'details')
     list.appendChild(li)
 }
 
+function createAction(el, label, classType) {
+    const btn = document.createElement('a');
+    btn.href='javascript:void(0)'
+    btn.textContent = label
+    btn.className = classType
+    el.appendChild(btn)
+}
+ 
 form.addEventListener('submit',async (event)=>{
     event.preventDefault();
     const formData = new FormData(event.target)//event.target is the form
@@ -41,14 +47,29 @@ form.addEventListener('submit',async (event)=>{
    createRow(item)
 })
 
-async function deleteItem(event) {
+async function itemAction(event) {
     if(event.target.tagName === 'A') {
         const id = event.target.parentNode.id;
-      const res = await fetch('/data/' + id, {
-            method: 'delete'
-        }) 
-        if(res.ok) {
-        event.target.parentNode.remove()
+        if(event.target.className === 'delete'){
+            await deleteItem(id)
+        } else if(event.target.className === 'details') {
+             detailsItem(id)
         }
+    }
+}
+async function deleteItem(id) {
+        const res = await fetch('/data/' + id, {
+            method: 'delete'
+        })
+        if(res.ok) {
+            document.getElementById(id).remove()
+        }
+}
+
+async function detailsItem(id) {
+    const res = await fetch('/data/' + id)
+    if(res.ok) {
+        const data = await res.json();
+        console.log(data)
     }
 }
