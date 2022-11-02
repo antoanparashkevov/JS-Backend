@@ -37,6 +37,14 @@ app.post('/data', (req,res) =>{
     res.status(201).json(record);
 })
 
+app.get('/data/:id', (req,res)=>{
+    const id = req.params.id;
+    const item = data.find(p=>p.id===id);
+    if(item){
+        res.json(item)
+    }
+})
+
 app.delete('/data/:id', (req,res)=>{
     const id = req.params.id;
     const arrayIndex = data.findIndex(p=>p.id === id);

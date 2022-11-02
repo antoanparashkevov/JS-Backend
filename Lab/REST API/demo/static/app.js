@@ -44,9 +44,11 @@ form.addEventListener('submit',async (event)=>{
 async function deleteItem(event) {
     if(event.target.tagName === 'A') {
         const id = event.target.parentNode.id;
-      await fetch('/data/' + id, {
+      const res = await fetch('/data/' + id, {
             method: 'delete'
         }) 
+        if(res.ok) {
         event.target.parentNode.remove()
+        }
     }
 }
