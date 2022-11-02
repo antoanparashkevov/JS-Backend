@@ -52,4 +52,13 @@ app.delete('/data/:id', (req,res)=>{
     res.end();
 })
 
+app.put('/data/:id', (req,res)=>{
+    const id = req.params.id
+    const item = data.find(p=>p.id === id)
+    item.name = req.body.name;
+    item.desc = req.body.desc
+    
+    res.status(202).end()
+})
+
 app.listen(3000)
